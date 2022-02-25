@@ -139,7 +139,7 @@ namespace gooditem
             CleanProgrm(_milabook,_milaApp,_selfBook, _allSheets, _workSheet, progress);
         }
 
-        #region 清理缓存 释放Excel
+        #region 清理缓存 释放Excel 保底删除进度条
         public void CleanProgrm(Workbook _book,Application _App,Workbooks _sBook,Sheets _sheets, Worksheet _workSheet,ProgressBox _loading)
         {
             _book.Close(true, Type.Missing, Type.Missing);
