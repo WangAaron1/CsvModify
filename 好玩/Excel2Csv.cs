@@ -271,7 +271,7 @@ namespace gooditem
             {
                 if (_boldData[i]._needBoldText.Length == 0)
                 {
-                    return;
+                    break;
                 }
                 if (_boldData[i]._needBoldText.Length ==1)
                 {
@@ -279,7 +279,7 @@ namespace gooditem
                     {
                         if (item <= 'A' || item >= 'Z')
                         {
-                            return;
+                            break;
                         }
                     }
                 }
