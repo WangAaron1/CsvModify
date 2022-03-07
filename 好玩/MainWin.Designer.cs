@@ -172,7 +172,7 @@ namespace gooditem
             this._day.Name = "_day";
             this._day.Size = new System.Drawing.Size(82, 27);
             this._day.TabIndex = 9;
-            this._day.SelectedIndexChanged += new System.EventHandler(this._day_SelectedIndexChanged);
+            this._day.SelectedIndexChanged += new System.EventHandler(this.Day_SelectedIndexChanged);
             // 
             // RealCsvPath
             // 
