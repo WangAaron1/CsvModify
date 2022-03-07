@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -62,26 +63,7 @@ namespace gooditem
                 //用Task来分割index
                 if (sp[0].Contains($"Task {Convert.ToInt32(_day.Text)}"))
                 {
-                    _isTrans = false;
-                    var where = sp[0].Trim();
-
-                    var num = where.Substring(5);
-
-                    var spNum = num.Split(' ');
-                    var taskNum = spNum[0].Split('-');
-
-                    if (Convert.ToInt32(taskNum[0]) < 10)
-                    {
-                        taskNum[0] = string.Concat("0", taskNum[0]);
-                    }
-                    _indexNum = string.Concat(taskNum[0], taskNum[1]);
-                    _suffixNumber = "01";
-                    _suffixString = 'A';
-                    _typeNum = 1;
-
-                    IdentifyNumber(_indexNum,out var _realNum);
-                    _indexNum = _realNum;
-                    _currentIndex = Convert.ToInt32(_realNum);
+                    FindTaskNum(sp[0]);
                     continue;
                 }
 
@@ -126,16 +108,16 @@ namespace gooditem
                 //重置文本开头字母
                 if (sp[0].Contains("NEW TASK!"))
                 {
+                    continue;
+                }
+                if (sp[0].Contains("Post Task"))
+                {
                     if (!_isTrans)
                     {
                         _typeNum = 1;
                         _suffixNumber = "01";
                         _suffixString = 'A';
                     }
-                    continue;
-                }
-                if (sp[0].Contains("Post Task"))
-                {
                     continue;
                 }
 
@@ -166,29 +148,62 @@ namespace gooditem
             //数据整合好后的写入处理
             if (_commentData != null)
             {
-                _csvName = $"{ABtest.Text}组-Day{_day.Text}文本配置.csv";
-                string[] _realCsvData = new string[_commentData.Count];
-                for (int i = 0; i < _commentData.Count; i++)
-                {
-                    _realCsvData[i] = $"{_commentData[i].key},,{_commentData[i].text}";
-                }
-                if (File.Exists($"{RealCsvPath.Text}\\{_csvName}"))
-                {
-                    File.WriteAllLines($"{RealCsvPath.Text}\\{_csvName}", _realCsvData);
-                }
-                else
-                {
-                    FileStream S = new FileStream($"{RealCsvPath.Text}\\{_csvName}", FileMode.Create);
-                    S.Close();
-                    File.WriteAllLines($"{RealCsvPath.Text}\\{_csvName}", _realCsvData);
-
-                }
-                MessageBox.Show("搞定", "文本转换完成");
-                System.Diagnostics.Process.Start($"{RealCsvPath.Text}\\");
-                System.Diagnostics.Process.Start($"{RealCsvPath.Text}\\{_csvName}");
-
+                WriteData2Csv();
             }
         }
+
+        #region 找到Task后的处理方法
+        public void FindTaskNum(string sp)
+        {
+
+            _isTrans = false;
+            var where = sp.Trim();
+
+            var num = where.Substring(5);
+
+            var spNum = num.Split(' ');
+            var taskNum = spNum[0].Split('-');
+
+            if (Convert.ToInt32(taskNum[0]) < 10)
+            {
+                taskNum[0] = string.Concat("0", taskNum[0]);
+            }
+            _indexNum = string.Concat(taskNum[0], taskNum[1]);
+            _suffixNumber = "01";
+            _suffixString = 'A';
+            _typeNum = 1;
+
+            IdentifyNumber(_indexNum, out var _realNum);
+            _indexNum = _realNum;
+            _currentIndex = Convert.ToInt32(_realNum);
+        }
+        #endregion
+        #region 数据写入处理 还是剥离出来好点
+        public void WriteData2Csv()
+        {
+            _csvName = $"{ABtest.Text}组-Day{_day.Text}文本配置.csv";
+            string[] _realCsvData = new string[_commentData.Count];
+            for (int i = 0; i < _commentData.Count; i++)
+            {
+                _realCsvData[i] = $"{_commentData[i].key},,{_commentData[i].text}";
+            }
+            if (File.Exists($"{RealCsvPath.Text}\\{_csvName}"))
+            {
+                File.WriteAllLines($"{RealCsvPath.Text}\\{_csvName}", _realCsvData, Encoding.UTF8);
+            }
+            else
+            {
+                FileStream S = new FileStream($"{RealCsvPath.Text}\\{_csvName}", FileMode.Create);
+                S.Close();
+                File.WriteAllLines($"{RealCsvPath.Text}\\{_csvName}", _realCsvData, Encoding.UTF8);
+
+            }
+            MessageBox.Show("搞定", "文本转换完成");
+            System.Diagnostics.Process.Start($"{RealCsvPath.Text}\\");
+            System.Diagnostics.Process.Start($"{RealCsvPath.Text}\\{_csvName}");
+        }
+
+        #endregion
 
         private void DialogOpen_Click(object sender, EventArgs e)
         {
@@ -212,7 +227,7 @@ namespace gooditem
             comment,
             bubble
         }
-        private void _day_SelectedIndexChanged(object sender, EventArgs e)
+        private void Day_SelectedIndexChanged(object sender, EventArgs e)
         {
             _csvName = $"{ABtest.Text}组-Day{_day.Text}文本配置.csv";
         }
@@ -311,9 +326,5 @@ namespace gooditem
 
         #endregion
 
-        private void Csv2Dat_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

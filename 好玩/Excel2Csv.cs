@@ -14,22 +14,22 @@ namespace gooditem
 {
     public partial class Excel2Csv
     {
-        public dynamic      _sheet;
-        public int          _whichSheet;
-        public string[]     _csvData;
-        public string       _csvText;
-        public string       _sheetName;
-        public string       _csvKey;
-        public string       _endOfDay;
+        public   dynamic    _sheet;
+        public   int        _whichSheet;
+        public   string[]   _csvData;
+        public   string     _csvText;
+        public   string     _sheetName;
+        public   string     _csvKey;
+        public   string     _endOfDay;
         readonly string     _richSuffix     = "<color=#17aa4b><b>";
         readonly string     _richSuffixNext = "</b></color>";
         readonly string     _boldSuffix     = "<b>";
         readonly string     _boldSuffixNext = "</b>";
-
         readonly double     _richDcolor     = 16711680.0;
-        public Characters   _richinfo;
-        public Range        _commentKey;
-        public Range        _commentText;
+
+        public   Characters   _richinfo;
+        public   Range        _commentKey;
+        public   Range        _commentText;
 
 
         private List<RichText> _richData;
@@ -97,6 +97,11 @@ namespace gooditem
                 _csvKey  = _commentKey.Text;
                 _csvText = _commentText.Text.Trim();
 
+                //做一层检测文本中有两个空格的操作
+                if (_csvText.Contains("  "))
+                {
+                    _csvText = _csvText.Replace("  "," ");
+                }
                 progress.CsvDataName.Text = _csvText;
 
                 //逗号处理
@@ -173,7 +178,7 @@ namespace gooditem
             sw.Write(contenttxt);
             sw.Close();
             var _textData = File.ReadAllLines(_csvPath);
-            File.WriteAllLines($"{_form.RealCsvPath.Text}\\{_form._csvName}", _textData);
+            File.WriteAllLines($"{_form.RealCsvPath.Text}\\{_form._csvName}", _textData, Encoding.UTF8);
         }
         #endregion
 
