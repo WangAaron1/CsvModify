@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvModify", "好玩\CsvModify.csproj", "{9F251A70-2424-4E2D-AB19-8D61F4AE7B7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvModify", "CsvModify\CsvModify.csproj", "{9F251A70-2424-4E2D-AB19-8D61F4AE7B7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

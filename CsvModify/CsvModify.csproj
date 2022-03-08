@@ -139,7 +139,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include=".editorconfig" />
-    <None Include="CsvModify_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
