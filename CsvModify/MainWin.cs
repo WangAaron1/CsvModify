@@ -327,9 +327,10 @@ namespace gooditem
 
         #endregion
 
-        private void label6_Click(object sender, EventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://docs.google.com/spreadsheets/d/1DFkFl6KTRm-udsgJ4w3XsU0CEFa9VY9Cf7gKYLyqEfk/edit#gid=0");
+
         }
     }
 }

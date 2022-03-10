@@ -49,7 +49,7 @@ namespace gooditem
             this.label4 = new System.Windows.Forms.Label();
             this.RichTextCheckbox = new System.Windows.Forms.CheckBox();
             this.AdjustedBox = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // ChangeCsv
@@ -284,16 +284,17 @@ namespace gooditem
             this.AdjustedBox.Text = "Adjusted?";
             this.AdjustedBox.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // linkLabel1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("等线", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(48, 326);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(202, 19);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "点击前往Excel文档网址";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("等线", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.linkLabel1.Location = new System.Drawing.Point(47, 312);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(202, 19);
+            this.linkLabel1.TabIndex = 24;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "点击前往Excel文档网址";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // CsvChangeMgr
             // 
@@ -301,7 +302,7 @@ namespace gooditem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(526, 356);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.RichTextCheckbox);
             this.Controls.Add(this.AdjustedBox);
             this.Controls.Add(this.label4);
@@ -351,7 +352,7 @@ namespace gooditem
         public System.Windows.Forms.Label label4;
         public System.Windows.Forms.CheckBox RichTextCheckbox;
         public System.Windows.Forms.CheckBox AdjustedBox;
-        public System.Windows.Forms.Label label6;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 
