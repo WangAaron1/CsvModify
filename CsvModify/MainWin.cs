@@ -178,6 +178,7 @@ namespace gooditem
             _currentIndex = Convert.ToInt32(_realNum);
         }
         #endregion
+
         #region 数据写入处理 还是剥离出来好点
         public void WriteData2Csv()
         {
